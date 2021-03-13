@@ -26,11 +26,9 @@ namespace Snake {
             int GetBoardWidth() const;
             int GetBoardHeight() const;
         private:
-            //SDL_Texture* texture;
             int cellWidth, cellHeight;
             char* matrix;
             bool isRangeEmpty(int x, int y, size_t rows, size_t cols, vector<pair<int, int>>& outRange);
-            //void SizeChanged(UIComponent* sender) override;
     };
 }
 
