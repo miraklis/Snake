@@ -10,6 +10,8 @@ You can play:
 * Two Player Game (human vs human)
 * Two Player Game (human vs computer)
 
-Next to implement -> network game
+Next to implement
+* Network game
+* Level editor
 
 Have fun!!!
