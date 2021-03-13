@@ -123,6 +123,6 @@ namespace Snake {
 
 	void PlayerManager::PutPlayerOnBoard(shared_ptr<Player> player) {
 		vector<pair<int, int>> initPos = Game::Gameboard->GetRegionEmpty(1, 10);
-		player->PutOnBoard(initPos[2].first, initPos[2].second); // 3rd cell from the 20cell region to fill with TBH (tail,body,head)
+		player->PutOnBoard(initPos[2].first, initPos[2].second); // 3rd cell from the 10cell region to fill with TBH (tail,body,head)
 	}
 }

@@ -1,7 +1,6 @@
 #include "stdHeaders.h"
 #include "SDL.h"
 #include "Game.h"
-#include "Net.h"
 
 using namespace Snake;
 

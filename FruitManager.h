@@ -1,10 +1,10 @@
-#pragma once
+#ifndef FRUITMANAGER_H
+#define FRUITMANAGER_H
 
 #include "stdHeaders.h"
 #include "SDL.h"
 #include "Singleton.h"
 #include "Fruit.h"
-//#include "Board.h"
 
 namespace Snake {
 	class FruitManager : public Singleton<FruitManager> {
@@ -27,3 +27,5 @@ namespace Snake {
 	};
 
 }
+
+#endif // FRUITMANAGER_H

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TIMER_H
+#define TIMER_H
 
 #include "stdHeaders.h"
 #include "Event.h"
@@ -24,3 +25,5 @@ namespace Snake {
         Event<> OnTimeOutEvent;
     };
 }
+
+#endif //TIMER_H

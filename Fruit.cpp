@@ -29,8 +29,8 @@ namespace Snake {
 				growBy = 0;
 				break;
 		}
-		position.w = fruitRect.w * 2;
-		position.h = fruitRect.h * 2;
+		rect.w = fruitRect.w * 2;
+		rect.h = fruitRect.h * 2;
 		this->boardCoords = fruitPos;
 		src.x = (uint8_t)kind * 122;
 		src.y = 0; 
@@ -53,7 +53,7 @@ namespace Snake {
 	void Fruit::Render(SDL_Texture* texture) {
 		if(!visible)
 			return;
-		SDL_RenderCopy(Game::Renderer, texture, &src, &position);
+		SDL_RenderCopy(Game::Renderer, texture, &src, &rect);
 	}
 
 	vector<pair<int, int>>& Fruit::GetBoardCoords() {

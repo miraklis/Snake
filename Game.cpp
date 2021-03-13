@@ -29,7 +29,7 @@ namespace Snake {
 
     void Game::Init() {
         if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-            Utils::ErrorMsg("SDL INITIALIZATION", SDL_GetError());
+            ErrorMsg("SDL INITIALIZATION", SDL_GetError());
             clean();
             exit(1);
         }
@@ -40,19 +40,19 @@ namespace Snake {
 
         window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_SHOWN);
         if (!window) {
-            Utils::ErrorMsg("WINDOW CREATION", SDL_GetError());
+            ErrorMsg("WINDOW CREATION", SDL_GetError());
             clean();
             exit(1);
         }
         Renderer = SDL_CreateRenderer(window, -1, 0);
         if (!Renderer) {
-            Utils::ErrorMsg("RENDERER CREATION", SDL_GetError());
+            ErrorMsg("RENDERER CREATION", SDL_GetError());
             clean();
             exit(1);
         }
         SDL_SetRenderDrawBlendMode(Renderer, SDL_BLENDMODE_BLEND);
         if (TTF_Init() < 0) {
-            Utils::ErrorMsg("TTF INIT", TTF_GetError());
+            ErrorMsg("TTF INIT", TTF_GetError());
             clean();
             exit(1);
         }
@@ -61,8 +61,10 @@ namespace Snake {
         SDL_Rect boardRect = Gameboard->GetRect();
         int midBoardX = boardRect.x + (boardRect.w / 2);
         int midBoardY = boardRect.y + (boardRect.h / 2);
+        std::string fnt = "assets/";
+        fnt.append(SDL_GUI::sFonts::TTF_ARCADE);
         banner = make_unique<SDL_GUI::UIPanel>(Renderer, "banner", 0, 0, 0, 0, true, true,
-                                               SDL_GUI::sFonts::TTF_ARCADE, 72,
+                                               fnt, 72,
                                                SDL_GUI::HorizontalAlign::Center, SDL_GUI::VerticalAlign::Middle, SDL_GUI::VerticalAlign::Middle, 
                                                TRANSPARENT_COLOR, WHITE_COLOR);
         banner->Hide();
@@ -70,7 +72,7 @@ namespace Snake {
         splashScreen->SetPos((screenWidth / 2) - (splashScreen->GetRect().w / 2), (screenHeight / 2) - (splashScreen->GetRect().h / 2));
         splashScreen->Show();
         menu = make_shared<SDL_GUI::UIMenu>(Renderer, "menu", midBoardX, midBoardY, 0, 0,
-                                            SDL_GUI::sFonts::TTF_ARCADE, 48,
+                                            fnt, 48,
                                             SDL_GUI::HorizontalAlign::Center, SDL_GUI::VerticalAlign::Middle, SDL_GUI::VerticalAlign::Middle,
                                             DARK_BLUE_COLOR, WHITE_COLOR, BLUE_COLOR, WHITE_COLOR,
                                             nullptr, bind(&Game::menuCommand, this, placeholders::_1));
@@ -138,11 +140,11 @@ namespace Snake {
                             break;
                         }
                         if(player1 != nullptr && player1->IsCrashed()) {
-                            PlayerManager::GetInstance().RespawnPlayer(player1);// , board);
+                            PlayerManager::GetInstance().RespawnPlayer(player1);
                             player1->Activate();
                         }
                         if(player2 != nullptr && player2->IsCrashed()) {
-                            PlayerManager::GetInstance().RespawnPlayer(player2);// , board);
+                            PlayerManager::GetInstance().RespawnPlayer(player2);
                             player2->Activate();
                         }
                         break;
@@ -286,7 +288,7 @@ namespace Snake {
     }
 
     void Game::Render() {
-        SDL_SetRenderDrawColor(Renderer, BACKGROUND_COLOR.r, BACKGROUND_COLOR.g, BACKGROUND_COLOR.b, BACKGROUND_COLOR.a); // 64,32,128,255);
+        SDL_SetRenderDrawColor(Renderer, BACKGROUND_COLOR.r, BACKGROUND_COLOR.g, BACKGROUND_COLOR.b, BACKGROUND_COLOR.a);
         SDL_RenderClear(Renderer);
         if(splashScreen != nullptr)
             splashScreen->Render();
@@ -306,15 +308,15 @@ namespace Snake {
         SDL_Quit();
     }
 
-    bool Game::Running() {
+    bool Game::Running() const {
         return isRunning;
     }
 
-    Game::GameType Game::GetType() {
+    Game::GameType Game::GetType() const {
         return gameType;
     }
 
-    Game::GameStatus Game::GetStatus() {
+    Game::GameStatus Game::GetStatus() const {
         return gameStatus;
     }
 

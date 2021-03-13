@@ -27,11 +27,9 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Net.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
@@ -45,108 +43,70 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="LevelManager.h" />
-    <ClInclude Include="Net.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
-    <ClInclude Include="SDL\begin_code.h" />
-    <ClInclude Include="SDL\close_code.h" />
-    <ClInclude Include="SDL\SDL.h" />
-    <ClInclude Include="SDL\SDL_assert.h" />
-    <ClInclude Include="SDL\SDL_atomic.h" />
-    <ClInclude Include="SDL\SDL_audio.h" />
-    <ClInclude Include="SDL\SDL_bits.h" />
-    <ClInclude Include="SDL\SDL_blendmode.h" />
-    <ClInclude Include="SDL\SDL_clipboard.h" />
-    <ClInclude Include="SDL\SDL_config.h" />
-    <ClInclude Include="SDL\SDL_config_android.h" />
-    <ClInclude Include="SDL\SDL_config_iphoneos.h" />
-    <ClInclude Include="SDL\SDL_config_macosx.h" />
-    <ClInclude Include="SDL\SDL_config_minimal.h" />
-    <ClInclude Include="SDL\SDL_config_pandora.h" />
-    <ClInclude Include="SDL\SDL_config_psp.h" />
-    <ClInclude Include="SDL\SDL_config_windows.h" />
-    <ClInclude Include="SDL\SDL_config_winrt.h" />
-    <ClInclude Include="SDL\SDL_config_wiz.h" />
-    <ClInclude Include="SDL\SDL_copying.h" />
-    <ClInclude Include="SDL\SDL_cpuinfo.h" />
-    <ClInclude Include="SDL\SDL_egl.h" />
-    <ClInclude Include="SDL\SDL_endian.h" />
-    <ClInclude Include="SDL\SDL_error.h" />
-    <ClInclude Include="SDL\SDL_events.h" />
-    <ClInclude Include="SDL\SDL_filesystem.h" />
-    <ClInclude Include="SDL\SDL_gamecontroller.h" />
-    <ClInclude Include="SDL\SDL_gesture.h" />
-    <ClInclude Include="SDL\SDL_haptic.h" />
-    <ClInclude Include="SDL\SDL_hints.h" />
-    <ClInclude Include="SDL\SDL_image.h" />
-    <ClInclude Include="SDL\SDL_joystick.h" />
-    <ClInclude Include="SDL\SDL_keyboard.h" />
-    <ClInclude Include="SDL\SDL_keycode.h" />
-    <ClInclude Include="SDL\SDL_loadso.h" />
-    <ClInclude Include="SDL\SDL_log.h" />
-    <ClInclude Include="SDL\SDL_main.h" />
-    <ClInclude Include="SDL\SDL_messagebox.h" />
-    <ClInclude Include="SDL\SDL_metal.h" />
-    <ClInclude Include="SDL\SDL_mouse.h" />
-    <ClInclude Include="SDL\SDL_mutex.h" />
-    <ClInclude Include="SDL\SDL_name.h" />
-    <ClInclude Include="SDL\SDL_opengl.h" />
-    <ClInclude Include="SDL\SDL_opengles.h" />
-    <ClInclude Include="SDL\SDL_opengles2.h" />
-    <ClInclude Include="SDL\SDL_opengles2_gl2.h" />
-    <ClInclude Include="SDL\SDL_opengles2_gl2ext.h" />
-    <ClInclude Include="SDL\SDL_opengles2_gl2platform.h" />
-    <ClInclude Include="SDL\SDL_opengles2_khrplatform.h" />
-    <ClInclude Include="SDL\SDL_opengl_glext.h" />
-    <ClInclude Include="SDL\SDL_pixels.h" />
-    <ClInclude Include="SDL\SDL_platform.h" />
-    <ClInclude Include="SDL\SDL_power.h" />
-    <ClInclude Include="SDL\SDL_quit.h" />
-    <ClInclude Include="SDL\SDL_rect.h" />
-    <ClInclude Include="SDL\SDL_render.h" />
-    <ClInclude Include="SDL\SDL_revision.h" />
-    <ClInclude Include="SDL\SDL_rwops.h" />
-    <ClInclude Include="SDL\SDL_scancode.h" />
-    <ClInclude Include="SDL\SDL_sensor.h" />
-    <ClInclude Include="SDL\SDL_shape.h" />
-    <ClInclude Include="SDL\SDL_stdinc.h" />
-    <ClInclude Include="SDL\SDL_surface.h" />
-    <ClInclude Include="SDL\SDL_system.h" />
-    <ClInclude Include="SDL\SDL_syswm.h" />
-    <ClInclude Include="SDL\SDL_test.h" />
-    <ClInclude Include="SDL\SDL_test_assert.h" />
-    <ClInclude Include="SDL\SDL_test_common.h" />
-    <ClInclude Include="SDL\SDL_test_compare.h" />
-    <ClInclude Include="SDL\SDL_test_crc32.h" />
-    <ClInclude Include="SDL\SDL_test_font.h" />
-    <ClInclude Include="SDL\SDL_test_fuzzer.h" />
-    <ClInclude Include="SDL\SDL_test_harness.h" />
-    <ClInclude Include="SDL\SDL_test_images.h" />
-    <ClInclude Include="SDL\SDL_test_log.h" />
-    <ClInclude Include="SDL\SDL_test_md5.h" />
-    <ClInclude Include="SDL\SDL_test_memory.h" />
-    <ClInclude Include="SDL\SDL_test_random.h" />
-    <ClInclude Include="SDL\SDL_thread.h" />
-    <ClInclude Include="SDL\SDL_timer.h" />
-    <ClInclude Include="SDL\SDL_touch.h" />
-    <ClInclude Include="SDL\SDL_ttf.h" />
-    <ClInclude Include="SDL\SDL_types.h" />
-    <ClInclude Include="SDL\SDL_version.h" />
-    <ClInclude Include="SDL\SDL_video.h" />
-    <ClInclude Include="SDL\SDL_vulkan.h" />
-    <ClInclude Include="SDL_GUI\SDL_GUI.h" />
-    <ClInclude Include="SDL_GUI\UIComponent.h" />
-    <ClInclude Include="SDL_GUI\UIImage.h" />
-    <ClInclude Include="SDL_GUI\UILabel.h" />
-    <ClInclude Include="SDL_GUI\UIMain.h" />
-    <ClInclude Include="SDL_GUI\UIMenu.h" />
-    <ClInclude Include="SDL_GUI\UIPanel.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="stdHeaders.h" />
-    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\3X5OUTLI.ttf">
+      <DeploymentContent>true</DeploymentContent>
+    </Font>
+    <Font Include="assets\Arcade.ttf">
+      <DeploymentContent>true</DeploymentContent>
+    </Font>
+    <Font Include="assets\Blox2.ttf">
+      <DeploymentContent>true</DeploymentContent>
+    </Font>
+    <Font Include="assets\ka1.ttf">
+      <DeploymentContent>true</DeploymentContent>
+    </Font>
+    <Font Include="assets\times.ttf">
+      <DeploymentContent>true</DeploymentContent>
+    </Font>
+    <Font Include="assets\Where My Keys.otf">
+      <DeploymentContent>true</DeploymentContent>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\brick.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="assets\floor.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="assets\floorOLD.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="assets\fruit.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="assets\snake.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="assets\snake2.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="assets\splash-screen.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Levels\lvl1.txt">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
+    </Text>
+    <Text Include="Levels\lvl2.txt">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
+    </Text>
+    <Text Include="Levels\lvl3.txt">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
+    </Text>
+    <Text Include="Levels\lvl4.txt">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
+    </Text>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -203,6 +163,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir)SDL;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)SDL;$(LibraryPath)</LibraryPath>
+    <CopyLocalDeploymentContent>true</CopyLocalDeploymentContent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>

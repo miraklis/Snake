@@ -1,14 +1,14 @@
 #include "LevelManager.h"
 #include "Game.h"
-//#include "Board.h"
+#include "Utils.h"
 
 namespace Snake {
 
     LevelManager::LevelManager() {
-        levelGoals[0] = 5;
-        levelGoals[1] = 5;
-        levelGoals[2] = 5;
-        levelGoals[3] = 5;
+        levelGoals[0] = 10;
+        levelGoals[1] = 15;
+        levelGoals[2] = 15;
+        levelGoals[3] = 20;
         ResetLevels();
     }
 
@@ -16,8 +16,12 @@ namespace Snake {
     }
 
     bool LevelManager::LoadLevel(int lvlID) {
+        if(lvlID > MAX_LEVEL) {
+            ErrorMsg("Wrong Level Number", "Error loading level");
+            return false;
+        }
         bool retVal{ false };
-        string lvlName = "lvl" + to_string(lvlID) + ".txt";
+        string lvlName = "Levels/lvl" + to_string(lvlID) + ".txt";
         ifstream lvl(lvlName);
         if(lvl.is_open()) {
             Game::Gameboard->ClearMatrix();

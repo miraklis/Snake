@@ -1,4 +1,5 @@
-#pragma once
+#ifndef AI_H
+#define AI_H
 
 #include "stdHeaders.h"
 
@@ -42,3 +43,4 @@ namespace Snake
 
 }
 
+#endif // AI_H

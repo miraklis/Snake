@@ -1,15 +1,16 @@
-#pragma once
+#ifndef BOARD_H
+#define BOARD_H
 
 #include "stdHeaders.h"
 #include "SDL.h"
-#include "UIComponent.h"
+#include "GameObject.h"
 #include "AI.h"
 
 #include "SDL_GUI.h"
 using namespace SDL_GUI;
 
 namespace Snake {
-    class Board : public UIComponent {
+    class Board : public GameObject {
         public:
             Board(int x, int y, size_t w, size_t h);
             ~Board() override;
@@ -25,10 +26,12 @@ namespace Snake {
             int GetBoardWidth() const;
             int GetBoardHeight() const;
         private:
-            SDL_Texture* texture;
+            //SDL_Texture* texture;
             int cellWidth, cellHeight;
             char* matrix;
             bool isRangeEmpty(int x, int y, size_t rows, size_t cols, vector<pair<int, int>>& outRange);
-            void SizeChanged(UIComponent* sender) override;
+            //void SizeChanged(UIComponent* sender) override;
     };
 }
+
+#endif // BOARD_H

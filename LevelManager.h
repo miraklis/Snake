@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LEVELMANAGER_H
+#define LEVELMANAGER_H
 
 #include "stdHeaders.h"
 #include "SDL.h"
@@ -26,3 +27,5 @@ namespace Snake {
             bool levelsFinished;
     };
 }
+
+#endif //LEVELMANAGER_H

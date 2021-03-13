@@ -1,6 +1,5 @@
-#pragma once
-
-//#define DEBUG
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 
 #include "SDL.h"
 
@@ -34,3 +33,5 @@ namespace Snake {
 	const int MAX_BODY{ 20 };
 	const int MAX_SPEED{ 60 };
 }
+
+#endif // CONSTANTS_H

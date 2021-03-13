@@ -1,12 +1,12 @@
 #include "FruitManager.h"
-#include "TextureManager.h"
 #include "Fruit.h"
 #include "Game.h"
+#include "Utils.h"
 
 namespace Snake {
 
 	FruitManager::FruitManager() {
-		texture = LoadTexture("assets/fruit.png");
+		texture = Snake::LoadTexture("assets/fruit.png");
 		totalFruits = 0 ;
 	}
 

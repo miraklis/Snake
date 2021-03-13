@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYERMANAGER_H
+#define PLAYERMANAGER_H
 
 #include "stdHeaders.h"
 #include "Singleton.h"
@@ -9,7 +10,6 @@ namespace Snake {
 
 	class Game;
 	class Player;
-	//class Board;
 
 	class PlayerManager : public Singleton<PlayerManager>
 	{
@@ -17,11 +17,11 @@ namespace Snake {
 		~PlayerManager();
 		shared_ptr<Player> CreatePlayer(bool human);
 		shared_ptr<Player> GetPlayer(int id);
-		shared_ptr<Player> SpawnNewPlayer(/*unique_ptr<Board>& board,*/ bool human);
-		void RespawnPlayersAtNextLevel(/*unique_ptr<Board>& board*/);
-		void RespawnPlayer(shared_ptr<Player> player/*, unique_ptr<Board>& board*/);
+		shared_ptr<Player> SpawnNewPlayer(bool human);
+		void RespawnPlayersAtNextLevel();
+		void RespawnPlayer(shared_ptr<Player> player);
 		void RenderPlayers();
-		void UpdatePlayers(/*unique_ptr<Board>& board, AI* ai*/);
+		void UpdatePlayers();
 		void RemovePlayer(shared_ptr<Player> player);
 		void RemoveAllPlayers();
 		void ActivateAllPlayers();
@@ -38,7 +38,9 @@ namespace Snake {
 		PlayerManager();
 		vector<shared_ptr<Player>> players;
 		shared_ptr<Player> winner;
-		void PutPlayerOnBoard(shared_ptr<Player> player/*, unique_ptr<Board>& board*/);
+		void PutPlayerOnBoard(shared_ptr<Player> player);
 	};
 
 }
+
+#endif //PLAYERSMANAGER_H

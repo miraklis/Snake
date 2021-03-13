@@ -1,14 +1,11 @@
-#pragma once
+#ifndef GAME_H
+#define GAME_H
 
 #include "stdHeaders.h"
 #include "SDL.h"
-//#include "UIImage.h"
-//#include "UIPanel.h"
-//#include "UIMenu.h"
 #include "Board.h"
 #include "Player.h"
 #include "Fruit.h"
-//#include "Net.h"
 
 #include "SDL_GUI.h"
 
@@ -24,9 +21,9 @@ namespace Snake {
         void HandleEvents();
         void Update();
         void Render();
-        bool Running();
-        GameType GetType();
-        GameStatus GetStatus();
+        bool Running() const;
+        GameType GetType() const;
+        GameStatus GetStatus() const;
         size_t NumOfPlayers() const;
         static SDL_Renderer* Renderer;
         static unique_ptr<Board> Gameboard;
@@ -35,7 +32,6 @@ namespace Snake {
         shared_ptr<SDL_GUI::UIMenu> menu;
         unique_ptr<SDL_GUI::UIPanel> banner;
         unique_ptr<UIImage> splashScreen;
-        //Net* net;
         GameType gameType;
         GameStatus gameStatus;
         bool isRunning;
@@ -51,3 +47,5 @@ namespace Snake {
         void playerAteFruit(shared_ptr<Player> player, Fruit& fruit);
     };
 }
+
+#endif GAME_H

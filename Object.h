@@ -1,4 +1,5 @@
-#pragma once
+#ifndef OBJECT_H
+#define OBJECT_H
 
 #include "SDL.h"
 
@@ -13,7 +14,9 @@ namespace Snake {
 		Object();
 		Object(int x, int y);
 		Object(int x, int y, size_t w, size_t h);
-		SDL_Rect position;
+		SDL_Rect rect;
 	};
 
 }
+
+#endif //OBJECT_H

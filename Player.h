@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include "stdHeaders.h"
 #include "SDL.h"
@@ -90,3 +91,5 @@ namespace Snake {
             unique_ptr<UIPanel> infoPanel;
     };
 }
+
+#endif //PLAYER_H

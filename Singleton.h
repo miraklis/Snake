@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SINGLETON_H
+#define SINGLETON_H
 
 namespace Snake {
 
@@ -16,3 +17,5 @@ namespace Snake {
 	};
 
 }
+
+#endif //SINGLETON_H

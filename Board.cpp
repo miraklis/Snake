@@ -1,6 +1,5 @@
 #include "Board.h"
 #include "Game.h"
-#include "TextureManager.h"
 #include "FruitManager.h"
 #include "Utils.h"
 
@@ -9,9 +8,9 @@ namespace Snake {
     const int BOARD_WIDTH {80};
     const int BOARD_HEIGHT {50};
 
-    Board::Board(int x, int y, size_t w, size_t h) : 
-            UIComponent(Game::Renderer, "board", x, y, w, h, false) {
-        texture = LoadTexture("assets/brick.png");
+    Board::Board(int x, int y, size_t w, size_t h) 
+            :GameObject(x,y,w,h,false, false) {
+        texture = Snake::LoadTexture("assets/brick.png");
         // Normalize size
         cellWidth = rect.w / BOARD_WIDTH;
         cellHeight = rect.h / BOARD_HEIGHT;
@@ -137,7 +136,5 @@ namespace Snake {
         }
         return isEmpty;
     }
-
-    void Board::SizeChanged(UIComponent* sender) {}
 
  }

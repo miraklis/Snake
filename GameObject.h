@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
 
 #include "stdHeaders.h"
 #include "Object.h"
@@ -15,6 +16,7 @@ namespace Snake {
 		void Deactivate();
 	protected:
 		GameObject(int x, int y, bool visible, bool active);
+		GameObject(int x, int y, size_t w, size_t h, bool visible, bool active);
 		virtual ~GameObject();
 		virtual void Render() = 0;
 		void LoadTexture(string texture);
@@ -24,3 +26,5 @@ namespace Snake {
 	};
 
 }
+
+#endif // GAMEOBJECT_H

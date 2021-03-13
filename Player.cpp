@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "Timer.h"
 #include "Board.h"
-#include "TextureManager.h"
 #include "FruitManager.h"
 #include "Utils.h"
 
@@ -315,8 +314,10 @@ namespace Snake {
 
     void Player::CreateInfoPanel(int x, int y, size_t w, size_t h, SDL_Color bgColor, SDL_Color fgColor, SDL_GUI::HorizontalAlign hAlign, SDL_GUI::VerticalAlign vAlign)
     {
+        std::string fnt = "assets/";
+        fnt.append(SDL_GUI::sFonts::TTF_TIMES);
         infoPanel = make_unique<UIPanel>(Game::Renderer, "plrINFO", x, y, w, h, false, true, 
-                                         SDL_GUI::sFonts::TTF_TIMES, 24,
+                                         fnt, 24,
                                          hAlign, vAlign, vAlign, bgColor, fgColor);
         infoPanel->AddItem("plr_name", this->Who());
         infoPanel->AddItem("plr_speed", "Speed: 0");

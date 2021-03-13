@@ -1,4 +1,5 @@
-#pragma once
+#ifndef FRUIT_H
+#define FRUIT_H
 
 #include "stdHeaders.h"
 #include "SDL.h"
@@ -26,3 +27,4 @@ namespace Snake {
 
 }
 
+#endif // FRUIT_H

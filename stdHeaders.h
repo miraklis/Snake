@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STDHEADERS_H
+#define STDHEADERS_H
 
 #define SDL_MAIN_HANDLED
 
@@ -21,3 +22,5 @@
 using namespace std;
 
 #include "Constants.h"
+
+#endif //STDHEADERS_H
