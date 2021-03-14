@@ -18,7 +18,7 @@ namespace Snake {
 	const SDL_Color DARK_BLUE_COLOR{ 0, 0, 32, 255 };
 
 	// Game Constants
-	const size_t INITIAL_FRUITS{ 3 };
+	const size_t INITIAL_FRUITS{ 5 };
 	const char CHAR_EMPTY{ ' ' };
 	const char CHAR_WALL{ '#' };
 	const char CHAR_FRUIT{ 'F' };
@@ -30,8 +30,8 @@ namespace Snake {
 	// Player Constants
 	const size_t INITIAL_LIVES{ 3 };
 	const size_t INITIAL_SPEED{ 20 };
-	const int MAX_BODY{ 20 };
-	const int MAX_SPEED{ 60 };
+	const int MAX_BODY{ 40 };
+	const int MAX_SPEED{ 80 };
 }
 
 #endif // CONSTANTS_H

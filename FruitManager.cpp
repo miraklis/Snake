@@ -14,15 +14,15 @@ namespace Snake {
 		SDL_DestroyTexture(texture);
 	}
 	
-	void FruitManager::GenerateFruits(/*unique_ptr<Board>& board, */int numOfFruits) {
-		thread t([=/*, &board*/]() mutable {
+	void FruitManager::GenerateFruits(int numOfFruits) {
+		thread t([=]() mutable {
 			unique_lock<mutex> lock(mux);
 			while(numOfFruits-- > 0) {
 				vector<pair<int, int>> fruitPos = Game::Gameboard->GetRegionEmpty();
 				SDL_Rect fruitRect = Game::Gameboard->GetCellRect(fruitPos[0].first, fruitPos[0].second);
 				unique_ptr<Fruit> fruit = MakeRandomFruit(fruitPos, fruitRect);
 				for(auto& p : fruit->GetBoardCoords()) {
-					Game::Gameboard->SetCell(p.first, p.second, CHAR_FRUIT); // (char)Board::CellKind::Fruit);
+					Game::Gameboard->SetCell(p.first, p.second, CHAR_FRUIT);
 				}
 				fruits.push_back(move(fruit));
 				totalFruits++;

@@ -24,9 +24,12 @@ namespace Snake {
         bool Running() const;
         GameType GetType() const;
         GameStatus GetStatus() const;
-        size_t NumOfPlayers() const;
+        pair<size_t, size_t> GetScreenSize() const;
         static SDL_Renderer* Renderer;
         static unique_ptr<Board> Gameboard;
+        // Event Handlers
+        void playerCrashed(shared_ptr<Player> player);
+        void playerAteFruit(shared_ptr<Player> player, Fruit& fruit);
     private:
         SDL_Window* window;
         shared_ptr<SDL_GUI::UIMenu> menu;
@@ -37,14 +40,10 @@ namespace Snake {
         bool isRunning;
         int screenWidth;
         int screenHeight;
-        size_t totalPlayers;
         void clean();
         bool menuCommand(string cmd);
         void startNewGame(string type);
         void startNewLevel();
-        // Event Handlers
-        void playerCrashed(shared_ptr<Player> player);
-        void playerAteFruit(shared_ptr<Player> player, Fruit& fruit);
     };
 }
 

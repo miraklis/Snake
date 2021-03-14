@@ -35,6 +35,41 @@ namespace Snake {
 		return player;
 	}
 
+	void PlayerManager::CreateGamePlayers(Game* game) {
+		SDL_Rect boardRect = Game::Gameboard->GetRect();
+		pair<size_t, size_t> screenSize = game->GetScreenSize();
+		shared_ptr<Player> newPlayer;
+		// Player 1
+		newPlayer = PlayerManager::GetInstance().SpawnNewPlayer(true);
+		newPlayer->MapKeys(SDLK_LEFT, SDLK_RIGHT, SDLK_UP, SDLK_DOWN);
+		newPlayer->OnCrashedEvent.AddListener(bind(&Game::playerCrashed, game, placeholders::_1));
+		newPlayer->OnFruitEatenEvent.AddListener(bind(&Game::playerAteFruit, game, placeholders::_1, placeholders::_2));
+		newPlayer->CreateInfoPanel(0, 0, boardRect.x, boardRect.h / 2, 
+		                           DARK_RED_COLOR, WHITE_COLOR, 
+		                           SDL_GUI::HorizontalAlign::Left, SDL_GUI::VerticalAlign::Top);
+		// Player 2
+		Game::GameType gameType = game->GetType();
+		if(gameType == Game::GameType::TwoPlayers || gameType == Game::GameType::PvC) {
+			if(gameType == Game::GameType::PvC) {
+				newPlayer = PlayerManager::GetInstance().SpawnNewPlayer(false);
+			} else {
+				newPlayer = PlayerManager::GetInstance().SpawnNewPlayer(true);
+				newPlayer->MapKeys(SDLK_a, SDLK_d, SDLK_w, SDLK_s);
+			}
+			newPlayer->OnCrashedEvent.AddListener(bind(&Game::playerCrashed, game, placeholders::_1));
+			newPlayer->OnFruitEatenEvent.AddListener(bind(&Game::playerAteFruit, game, placeholders::_1, placeholders::_2));
+			newPlayer->CreateInfoPanel(boardRect.x + boardRect.w, 0, screenSize.first - (boardRect.x + boardRect.w), boardRect.h / 2, 
+			                            DARK_RED_COLOR, WHITE_COLOR, 
+			                            SDL_GUI::HorizontalAlign::Right, SDL_GUI::VerticalAlign::Top);
+		}
+	}
+
+	void PlayerManager::HandlePlayersInput(SDL_Keycode input) {
+		for(auto& player : players) {
+			player->HandleKeyInput(input);
+		}
+	}
+
 	void PlayerManager::RespawnPlayersAtNextLevel() {
 		for(auto& player : players) {
 			player->Init(Player::InitLevel::NewLevel);
@@ -115,6 +150,10 @@ namespace Snake {
 		if(players[0]->IsDead())
 			return players[1];
 		return players[0];
+	}
+
+	int PlayerManager::GetTotalPlayers() const {
+		return players.size();
 	}
 
 	shared_ptr<Player> PlayerManager::GetLastWinner() {

@@ -21,6 +21,44 @@ namespace Snake {
         SDL_DestroyTexture(texture);
     }
 
+    void Player::MapKeys(SDL_Keycode keyLeft, SDL_Keycode keyRight, SDL_Keycode keyUp, SDL_Keycode keyDown) {
+        sMove.KeyLeft = keyLeft;
+        sMove.KeyRight = keyRight;
+        sMove.KeyUp = keyUp;
+        sMove.KeyDown = keyDown;
+    }
+
+    bool Player::HandleKeyInput(SDL_Keycode key) {
+        if((!active && !IsCrashed()) || !human)
+            return false;
+        if(key == sMove.KeyLeft) {
+            Turn(Player::Direction::Left);
+            return true;
+        }
+        if(key == sMove.KeyRight) {
+            Turn(Player::Direction::Right);
+            return true;
+        }
+        if(key == sMove.KeyUp) {
+            Turn(Player::Direction::Up);
+            return true;
+        }
+        if(key == sMove.KeyDown) {
+            Turn(Player::Direction::Down);
+            return true;
+        }
+        if(key == SDLK_SPACE) { // Common key for all players (respawn)
+            if(this->IsCrashed()) {
+                Init(Player::InitLevel::Respawn);
+                EraseFromBoard();
+                vector<pair<int, int>> initPos = Game::Gameboard->GetRegionEmpty(1, 10);
+                PutOnBoard(initPos[2].first, initPos[2].second);
+                Activate();
+            }
+        }
+        return false;
+    }
+
     bool Player::operator==(const Player& other) {
         return this->id == other.id;
     }

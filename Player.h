@@ -21,6 +21,8 @@ namespace Snake {
             bool operator== (const Player& other);
             Player(string imgFile, int id, bool human = true);
             ~Player() override;
+            void MapKeys(SDL_Keycode keyLeft, SDL_Keycode keyRight, SDL_Keycode keyUp, SDL_Keycode keyDown);
+            bool HandleKeyInput(SDL_Keycode key);
             void Init(InitLevel initLevel);
 			void EraseFromBoard();
             void PutOnBoard(int x, int y);
@@ -28,7 +30,7 @@ namespace Snake {
             void Grow(int growBy);
             void SpeedUp(int speedUpBy);
             void Update();
-            void Render();
+            void Render() override;
             void PauseStartTimer();
             void CreateInfoPanel(int x, int y, size_t w, size_t h, SDL_Color bgColor, SDL_Color fgColor,
                                  SDL_GUI::HorizontalAlign halign, SDL_GUI::VerticalAlign valign);
@@ -65,6 +67,12 @@ namespace Snake {
                 int boardCellY;
                 bool clockwise;
             };
+            struct SnakeMove {
+                SDL_Keycode KeyLeft;
+                SDL_Keycode KeyRight;
+                SDL_Keycode KeyUp;
+                SDL_Keycode KeyDown;
+            } sMove;
             vector<SnakePart> sBody;
             unique_ptr<AI> ai;
             uint8_t lives;
@@ -87,7 +95,6 @@ namespace Snake {
             bool checkCollisions(int x, int y);
             bool canChangeDirection(Direction newDir);
             char getNextCellForHead(Direction newDir) const;
-
             unique_ptr<UIPanel> infoPanel;
     };
 }

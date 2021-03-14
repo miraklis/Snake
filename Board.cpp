@@ -51,7 +51,6 @@ namespace Snake {
         r.h = cellHeight;
         r.x = rect.x + (x * cellWidth);
         r.y = rect.y + (y * cellHeight);
-
         return r;
     }
 
@@ -105,20 +104,18 @@ namespace Snake {
             GetRandomEmpty(x, y);
             found = isRangeEmpty(x, y, rows, cols, region);
         }
-        return move(region);
+        return region;
     }
 
     bool Board::CheckLimits(int x, int y) {
         return (x >= 0 && y>=0 && x < BOARD_WIDTH && y < BOARD_HEIGHT);
     }
 
-    int Board::GetBoardWidth() const
-    {
+    int Board::GetBoardWidth() const {
         return BOARD_WIDTH;
     }
 
-    int Board::GetBoardHeight() const
-    {
+    int Board::GetBoardHeight() const {
         return BOARD_HEIGHT;
     }
 

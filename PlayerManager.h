@@ -18,6 +18,8 @@ namespace Snake {
 		shared_ptr<Player> CreatePlayer(bool human);
 		shared_ptr<Player> GetPlayer(int id);
 		shared_ptr<Player> SpawnNewPlayer(bool human);
+		void CreateGamePlayers(Game* game);
+		void HandlePlayersInput(SDL_Keycode input);
 		void RespawnPlayersAtNextLevel();
 		void RespawnPlayer(shared_ptr<Player> player);
 		void RenderPlayers();
@@ -33,6 +35,7 @@ namespace Snake {
 		shared_ptr<Player> GetLastWinner();
 		shared_ptr<Player> GetFinalWinner();
 		shared_ptr<Player> GetLastPlayerAlive();
+		int GetTotalPlayers() const;
 	private:
 		friend class Singleton<PlayerManager>;
 		PlayerManager();

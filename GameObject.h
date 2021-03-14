@@ -19,7 +19,6 @@ namespace Snake {
 		GameObject(int x, int y, size_t w, size_t h, bool visible, bool active);
 		virtual ~GameObject();
 		virtual void Render() = 0;
-		void LoadTexture(string texture);
 		SDL_Texture* texture;
 		bool visible;
 		bool active;

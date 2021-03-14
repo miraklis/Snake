@@ -92,69 +92,30 @@ namespace Snake {
         }
         SDL_Event event;
         SDL_PollEvent(&event);
-        shared_ptr<Player> player1 = PlayerManager::GetInstance().GetPlayer(0);
-        shared_ptr<Player> player2 = PlayerManager::GetInstance().GetPlayer(1);
+        bool keyHandled = false;
         switch(event.type) {
             case SDL_QUIT:
                 isRunning = false;
                 break;
             case SDL_KEYDOWN:
                 switch(event.key.keysym.sym) {
-                    case SDLK_LEFT:
-                        if(player1 != nullptr)
-                            player1->Turn(Player::Direction::Left);
-                        break;
-                    case SDLK_RIGHT:
-                        if(player1 != nullptr)
-                            player1->Turn(Player::Direction::Right);
-                        break;
-                    case SDLK_UP:
-                        if(player1 != nullptr)
-                            player1->Turn(Player::Direction::Up);
-                        break;
-                    case SDLK_DOWN:
-                        if(player1 != nullptr)
-                            player1->Turn(Player::Direction::Down);
-                        break;
-                    case SDLK_a:
-                        if(player2 != nullptr && gameType == GameType::TwoPlayers)
-                            player2->Turn(Player::Direction::Left);
-                        break;
-                    case SDLK_d:
-                        if(player2 != nullptr && gameType == GameType::TwoPlayers)
-                            player2->Turn(Player::Direction::Right);
-                        break;
-                    case SDLK_w:
-                        if(player2 != nullptr && gameType == GameType::TwoPlayers)
-                            player2->Turn(Player::Direction::Up);
-                        break;
-                    case SDLK_s:
-                        if(player2 != nullptr && gameType == GameType::TwoPlayers)
-                            player2->Turn(Player::Direction::Down);
-                        break;
-                    case SDLK_SPACE: // Respawn player
-                        if(gameStatus == GameStatus::GameFinished || gameStatus == GameStatus::GameOver)
-                            break;
+                    case SDLK_SPACE: // Change Level or Respawn player
                         if(gameStatus == GameStatus::LevelCompleted) {
                             startNewLevel();
+                            keyHandled = true;
                             break;
-                        }
-                        if(player1 != nullptr && player1->IsCrashed()) {
-                            PlayerManager::GetInstance().RespawnPlayer(player1);
-                            player1->Activate();
-                        }
-                        if(player2 != nullptr && player2->IsCrashed()) {
-                            PlayerManager::GetInstance().RespawnPlayer(player2);
-                            player2->Activate();
                         }
                         break;
                     case SDLK_ESCAPE:
                         PlayerManager::GetInstance().PausePlayers();
                         menu->Show();
+                        keyHandled = true;
                         break;
                     default:
                         break;
                 }
+                if(!keyHandled && gameStatus == GameStatus::Playing)
+                    PlayerManager::GetInstance().HandlePlayersInput(event.key.keysym.sym);
                 break;
             default:
                 break;
@@ -183,56 +144,39 @@ namespace Snake {
     }
 
     void Game::startNewLevel() {
+        banner->Hide();
         gameStatus = GameStatus::Playing;
         LevelManager::GetInstance().LoadNextLevel();
         FruitManager::GetInstance().GenerateFruits(INITIAL_FRUITS);
         PlayerManager::GetInstance().RespawnPlayersAtNextLevel();
         PlayerManager::GetInstance().ShowAllPlayers();
-        banner->Hide();
         PlayerManager::GetInstance().ActivateAllPlayers();
     }
 
      void Game::startNewGame(string type) {
-        if(splashScreen != nullptr) {
+        if(gameStatus == GameStatus::SplashScreen) {
             splashScreen.reset(nullptr);
             splashScreen = nullptr;
         }
         if(type == "oneplayer") {
-            totalPlayers = 1;
             gameType = GameType::OnePlayer;
         }
         if(type == "twoplayers") {
-            totalPlayers = 2;
             gameType = GameType::TwoPlayers;
         }
         if(type == "pvc") {
-            totalPlayers = 2;
             gameType = GameType::PvC;
         }
         LevelManager::GetInstance().ResetLevels();
         LevelManager::GetInstance().LoadNextLevel();
         FruitManager::GetInstance().GenerateFruits(INITIAL_FRUITS);
         PlayerManager::GetInstance().RemoveAllPlayers();
-        int pnlWidth = Gameboard->GetRect().x;
-        int pnlHeight = screenHeight;
-        int pnl2X = Gameboard->GetRect().x + Gameboard->GetRect().w;
-        int pnl2W = screenWidth - pnl2X;
-        for(size_t i = 0; i < totalPlayers; i++) {
-            shared_ptr<Player> newPlayer;
-            newPlayer = PlayerManager::GetInstance().SpawnNewPlayer(!(i == 1 && gameType == GameType::PvC));
-            if(i == 0)
-                newPlayer->CreateInfoPanel(0, 0, pnlWidth, pnlHeight, DARK_GREEN_COLOR, WHITE_COLOR, SDL_GUI::HorizontalAlign::Left, SDL_GUI::VerticalAlign::Top);
-            else
-                newPlayer->CreateInfoPanel(pnl2X, 0, pnl2W, pnlHeight, DARK_GREEN_COLOR, WHITE_COLOR, SDL_GUI::HorizontalAlign::Right, SDL_GUI::VerticalAlign::Top);
-            newPlayer->OnCrashedEvent.AddListener(bind(&Game::playerCrashed, this, placeholders::_1));
-            newPlayer->OnFruitEatenEvent.AddListener(bind(&Game::playerAteFruit, this, placeholders::_1, placeholders::_2));
-        }
+        PlayerManager::GetInstance().CreateGamePlayers(this);
         PlayerManager::GetInstance().ShowAllPlayers();
+        PlayerManager::GetInstance().ActivateAllPlayers();
         Gameboard->Show();
-        SDL_Rect boardRect = Gameboard->GetRect();
         banner->Hide();
         gameStatus = GameStatus::Playing;
-        PlayerManager::GetInstance().ActivateAllPlayers();
      }
 
     void Game::playerCrashed(shared_ptr<Player> player) {
@@ -241,7 +185,7 @@ namespace Snake {
             PlayerManager::GetInstance().DeactivateAllPlayers();
             banner->ClearItems();
             banner->AddItem("lbl1", "GAME OVER!!!");
-            if(totalPlayers > 1)
+            if(PlayerManager::GetInstance().GetTotalPlayers() > 1)
                 banner->AddItem("lbl2", "WINNER : " + PlayerManager::GetInstance().GetLastPlayerAlive()->Who());
             banner->SetPos((screenWidth / 2) - (banner->GetRect().w / 2), (screenHeight / 2) - (banner->GetRect().h / 2));
             banner->Show();
@@ -267,7 +211,7 @@ namespace Snake {
             } else {
                 banner->AddItem("lbl1", "LEVEL FINISHED!!!");
             }
-            if(totalPlayers > 1) {
+            if(PlayerManager::GetInstance().GetTotalPlayers() > 1) {
                 PlayerManager::GetInstance().WinForPlayer(player);
                 if(gameStatus == GameStatus::GameFinished) {
                     if(PlayerManager::GetInstance().GetFinalWinner())
@@ -320,8 +264,8 @@ namespace Snake {
         return gameStatus;
     }
 
-    size_t Game::NumOfPlayers() const {
-        return totalPlayers;
+    pair<size_t, size_t> Game::GetScreenSize() const {
+        return pair<size_t, size_t>(screenWidth, screenHeight);
     }
 
 }

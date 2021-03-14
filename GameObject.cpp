@@ -16,10 +16,6 @@ namespace Snake {
 
 	GameObject::~GameObject() {}
 
-	void GameObject::LoadTexture(string texture) {
-		this->texture = Snake::LoadTexture(texture);
-	}
-
 	bool GameObject::IsActive() {
 		return active;
 	}
